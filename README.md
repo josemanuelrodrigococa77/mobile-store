@@ -182,4 +182,8 @@ src/
 ## Autor
 
 Prueba técnica Front-End.
-JOSÉ MANUEL RODRIGO COCAjose.rodrigo@globant.com
+JOSÉ MANUEL RODRIGO COCA
+jose.rodrigo@globant.com
+
+# Nota
+El endpoint actualmente devuelve count: 1 por cada operación y el cliente acumula ese valor, ya que el comportamiento real del API no coincide exactamente con lo descrito en el documento.
