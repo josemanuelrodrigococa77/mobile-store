@@ -49,8 +49,6 @@ function ProductDetailPage() {
         selectedStorage
       );
 
-      console.log("Respuesta carrito:", data);
-
       setCartCount((previousCount) => previousCount + data.count);
     } catch (error) {
       console.error("Error al añadir al carrito:", error);

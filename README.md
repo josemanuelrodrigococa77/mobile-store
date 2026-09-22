@@ -179,15 +179,15 @@ src/
 | `npm run test` | Ejecuta los tests |
 | `npm run lint` | Ejecuta ESLint |
 
+# Notas
+
+El endpoint actualmente devuelve count: 1 por cada operación y el cliente acumula ese valor, ya que el comportamiento real del API no coincide exactamente con lo descrito en el documento.
+Usar React 19 no obliga a utilizar use, Suspense, Server Components o Actions. En una single-page application pequeña con Vite, Router y un API REST, no tiene sentido añadirlas artificialmente.
+
 ## Autor
 
 Prueba técnica Front-End.
 JOSÉ MANUEL RODRIGO COCA
-<<<<<<< HEAD
-jose.rodrigo@globant.com
-=======
 jose.rodrigo@globant.com
 
-# Nota
-El endpoint actualmente devuelve count: 1 por cada operación y el cliente acumula ese valor, ya que el comportamiento real del API no coincide exactamente con lo descrito en el documento.
->>>>>>> 0484785fcd401de474643ba32b405b608e6c1816
+

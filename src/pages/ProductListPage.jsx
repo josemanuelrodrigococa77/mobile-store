@@ -13,9 +13,6 @@ function ProductListPage() {
     async function loadProducts() {
       try {
         const data = await getProducts();
-
-        console.log("Productos recibidos:", data);
-
         setProducts(data);
       } catch (error) {
         console.error(error);

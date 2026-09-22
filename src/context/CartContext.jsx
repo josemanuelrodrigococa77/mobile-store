@@ -5,11 +5,19 @@ export function CartProvider({ children }) {
   const [cartCount, setCartCount] = useState(() => {
     const savedCount = localStorage.getItem("cartCount");
 
-    return savedCount ? Number(savedCount) : 0;
+    if (!savedCount) {
+      return 0;
+    }
+
+    const parsedCount = Number(savedCount);
+
+    return Number.isFinite(parsedCount) && parsedCount >= 0
+      ? parsedCount
+      : 0;
   });
 
   useEffect(() => {
-    localStorage.setItem("cartCount", cartCount);
+    localStorage.setItem("cartCount", String(cartCount));
   }, [cartCount]);
 
   return (

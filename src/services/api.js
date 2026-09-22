@@ -1,5 +1,8 @@
 import { getCache, saveCache } from "../utils/cache";
-const API_URL = "https://itx-frontend-test.onrender.com";
+
+const API_URL =
+  import.meta.env.VITE_API_URL ??
+  "https://itx-frontend-test.onrender.com";
 
 export async function getProducts() {
   const cacheKey = "products";
@@ -7,12 +10,8 @@ export async function getProducts() {
   const cachedProducts = getCache(cacheKey);
 
   if (cachedProducts) {
-    console.log("Productos obtenidos desde caché");
-
     return cachedProducts;
   }
-
-  console.log("Productos obtenidos desde API");
 
   const response = await fetch(`${API_URL}/api/product`);
 
@@ -33,12 +32,8 @@ export async function getProductById(id) {
   const cachedProduct = getCache(cacheKey);
 
   if (cachedProduct) {
-    console.log("Detalle obtenido desde caché");
-
     return cachedProduct;
   }
-
-  console.log("Detalle obtenido desde API");
 
   const response = await fetch(`${API_URL}/api/product/${id}`);
 

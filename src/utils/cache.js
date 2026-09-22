@@ -16,15 +16,30 @@ export function getCache(key) {
     return null;
   }
 
-  const parsedCache = JSON.parse(cached);
+  try {
+    const parsedCache = JSON.parse(cached);
 
-  const hasExpired =
-    Date.now() - parsedCache.timestamp > CACHE_DURATION;
+    if (
+      typeof parsedCache !== "object" ||
+      parsedCache === null ||
+      typeof parsedCache.timestamp !== "number" ||
+      !("data" in parsedCache)
+    ) {
+      localStorage.removeItem(key);
+      return null;
+    }
 
-  if (hasExpired) {
+    const hasExpired =
+      Date.now() - parsedCache.timestamp > CACHE_DURATION;
+
+    if (hasExpired) {
+      localStorage.removeItem(key);
+      return null;
+    }
+
+    return parsedCache.data;
+  } catch {
     localStorage.removeItem(key);
     return null;
   }
-
-  return parsedCache.data;
 }
