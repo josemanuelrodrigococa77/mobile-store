@@ -4,13 +4,41 @@ const API_URL =
   import.meta.env.VITE_API_URL ??
   "https://itx-frontend-test.onrender.com";
 
+function normalizeCamera(camera) {
+  if (Array.isArray(camera)) {
+    return camera;
+  }
+
+  if (camera == null || camera === "") {
+    return [];
+  }
+
+  return [camera];
+}
+
+export function toProduct(apiResponse = {}) {
+  return {
+    ...apiResponse,
+    brand: apiResponse.brand ?? "",
+    model: apiResponse.model ?? "",
+    primaryCamera: normalizeCamera(apiResponse.primaryCamera),
+    secondaryCamera: normalizeCamera(
+      apiResponse.secondaryCamera ?? apiResponse.secondaryCmera
+    ),
+    dimensions: apiResponse.dimensions ?? apiResponse.dimentions ?? "",
+    options: {
+      colors: apiResponse.options?.colors ?? [],
+      storages: apiResponse.options?.storages ?? [],
+    },
+  };
+}
+
 export async function getProducts() {
   const cacheKey = "products";
-
   const cachedProducts = getCache(cacheKey);
 
   if (cachedProducts) {
-    return cachedProducts;
+    return cachedProducts.map(toProduct);
   }
 
   const response = await fetch(`${API_URL}/api/product`);
@@ -20,19 +48,19 @@ export async function getProducts() {
   }
 
   const data = await response.json();
+  const products = data.map(toProduct);
 
-  saveCache(cacheKey, data);
+  saveCache(cacheKey, products);
 
-  return data;
+  return products;
 }
 
 export async function getProductById(id) {
   const cacheKey = `product-${id}`;
-
   const cachedProduct = getCache(cacheKey);
 
   if (cachedProduct) {
-    return cachedProduct;
+    return toProduct(cachedProduct);
   }
 
   const response = await fetch(`${API_URL}/api/product/${id}`);
@@ -41,7 +69,7 @@ export async function getProductById(id) {
     throw new Error("Error al obtener el detalle del producto");
   }
 
-  const data = await response.json();
+  const data = toProduct(await response.json());
 
   saveCache(cacheKey, data);
 

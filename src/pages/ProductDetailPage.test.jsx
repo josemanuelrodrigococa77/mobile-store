@@ -47,8 +47,8 @@ describe("ProductDetailPage", () => {
     displaySize: "7",
     battery: "3400 mAh",
     primaryCamera: ["13 MP"],
-    secondaryCmera: ["2 MP"],
-    dimentions: "191 x 99 x 9 mm",
+    secondaryCamera: ["2 MP"],
+    dimensions: "191 x 99 x 9 mm",
     weight: "260",
 
     options: {

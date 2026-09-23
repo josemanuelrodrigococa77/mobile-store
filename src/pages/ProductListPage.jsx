@@ -1,78 +1,50 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "../services/api";
+import { useCallback, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
+import { useAsync } from "../hooks/useAsync";
+import { getProducts } from "../services/api";
 
 function ProductListPage() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        const data = await getProducts();
-        setProducts(data);
-      } catch (error) {
-        console.error(error);
-        setError("No se han podido cargar los productos");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadProducts();
-  }, []);
+  const fetchProducts = useCallback(() => getProducts(), []);
+  const { data: products = [], loading, error } = useAsync(fetchProducts);
 
   if (loading) {
     return <p>Cargando productos...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p>No se han podido cargar los productos</p>;
   }
 
-    const filteredProducts = products.filter((product) => {
-    const search = searchTerm.toLowerCase();
-
-    return (
-        product.brand.toLowerCase().includes(search) ||
-        product.model.toLowerCase().includes(search)
-        );
-  });
+  const search = searchTerm.toLowerCase();
+  const filteredProducts = (products ?? []).filter((product) =>
+    product.brand?.toLowerCase().includes(search) ||
+    product.model?.toLowerCase().includes(search)
+  );
 
   return (
     <main className="product-list-page">
-        <div className="product-list-header">
+      <div className="product-list-header">
         <div>
-            <h1>Productos</h1>
-            <p>{filteredProducts.length} productos</p>
+          <h1>Productos</h1>
+          <p>{filteredProducts.length} productos</p>
         </div>
 
-        <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
-        />
-        </div>
+        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      </div>
 
-        {filteredProducts.length === 0 && (
-            <p className="no-results">
-                No se han encontrado productos.
-            </p>
-        )}
+      {filteredProducts.length === 0 && (
+        <p className="no-results">No se han encontrado productos.</p>
+      )}
 
-        <div className="product-grid">
+      <div className="product-grid">
         {filteredProducts.map((product) => (
-            <ProductCard
-            key={product.id}
-            product={product}
-            />
+          <ProductCard key={product.id} product={product} />
         ))}
-        </div>
+      </div>
     </main>
   );
-
 }
 
 export default ProductListPage;
