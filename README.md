@@ -181,8 +181,16 @@ src/
 
 # Notas
 
-El endpoint actualmente devuelve count: 1 por cada operación y el cliente acumula ese valor, ya que el comportamiento real del API no coincide exactamente con lo descrito en el documento.
-Usar React 19 no obliga a utilizar use, Suspense, Server Components o Actions. En una single-page application pequeña con Vite, Router y un API REST, no tiene sentido añadirlas artificialmente.
+### Comportamiento del carrito
+
+El API devuelve actualmente `count: 1` en cada operación de añadir al carrito. Dado que este valor no se comporta como se describe en la especificación original del API, el cliente no depende de él para mantener el estado del carrito.
+En su lugar, el contador del carrito se incrementa localmente en `+1` después de cada operación de añadido realizada correctamente. De esta forma, el comportamiento de la interfaz es predecible y se evita acoplar el cliente a una respuesta del API que no es fiable.
+El contador del carrito se persiste en `localStorage` y se sincroniza entre distintas pestañas del navegador mediante el evento `storage`.
+
+### React 19
+
+El uso de React 19 no obliga a utilizar `use`, Suspense, Server Components o Actions.
+Este proyecto es una pequeña aplicación SPA (*Single Page Application*) construida con Vite y React Router que consume un API REST. Introducir estas funcionalidades de React 19 sin una necesidad concreta añadiría complejidad innecesaria, por lo que se ha optado deliberadamente por un enfoque convencional de obtención de datos y gestión de estado en el cliente.
 
 ## Autor
 
