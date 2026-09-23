@@ -1,32 +1,14 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi,
-} from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-import {
-  MemoryRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 import ProductDetailPage from "./ProductDetailPage";
 //import Header from "../components/Header";
 import { CartProvider } from "../context/CartContext.jsx";
 
-import {
-  addToCart,
-  getProductById,
-} from "../services/api";
+import { addToCart, getProductById } from "../services/api";
 
 vi.mock("../services/api", () => ({
   getProductById: vi.fn(),
@@ -78,16 +60,13 @@ describe("ProductDetailPage", () => {
 
   function renderPage() {
     return render(
-        <MemoryRouter initialEntries={["/product/123"]}>
+      <MemoryRouter initialEntries={["/product/123"]}>
         <CartProvider>
-            <Routes>
-            <Route
-                path="/product/:id"
-                element={<ProductDetailPage />}
-            />
-            </Routes>
+          <Routes>
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+          </Routes>
         </CartProvider>
-        </MemoryRouter>
+      </MemoryRouter>
     );
   }
 
@@ -107,9 +86,7 @@ describe("ProductDetailPage", () => {
       })
     ).toBeInTheDocument();
 
-    expect(
-      getProductById
-    ).toHaveBeenCalledWith("123");
+    expect(getProductById).toHaveBeenCalledWith("123");
   });
 
   test("permite seleccionar color y almacenamiento", async () => {
@@ -119,11 +96,9 @@ describe("ProductDetailPage", () => {
       name: /Acer\s+Iconia Talk S/i,
     });
 
-    const storage =
-      screen.getByLabelText("Almacenamiento");
+    const storage = screen.getByLabelText("Almacenamiento");
 
-    const color =
-      screen.getByLabelText("Color");
+    const color = screen.getByLabelText("Color");
 
     fireEvent.change(storage, {
       target: {
@@ -149,26 +124,20 @@ describe("ProductDetailPage", () => {
     renderPage();
 
     await screen.findByRole("heading", {
-        name: /Acer\s+Iconia Talk S/i,
+      name: /Acer\s+Iconia Talk S/i,
     });
 
-    fireEvent.change(
-      screen.getByLabelText("Almacenamiento"),
-      {
-        target: {
-          value: "2001",
-        },
-      }
-    );
+    fireEvent.change(screen.getByLabelText("Almacenamiento"), {
+      target: {
+        value: "2001",
+      },
+    });
 
-    fireEvent.change(
-      screen.getByLabelText("Color"),
-      {
-        target: {
-          value: "1001",
-        },
-      }
-    );
+    fireEvent.change(screen.getByLabelText("Color"), {
+      target: {
+        value: "1001",
+      },
+    });
 
     fireEvent.click(
       screen.getByRole("button", {
@@ -177,11 +146,7 @@ describe("ProductDetailPage", () => {
     );
 
     await waitFor(() => {
-      expect(addToCart).toHaveBeenCalledWith(
-        "123",
-        1001,
-        2001
-      );
+      expect(addToCart).toHaveBeenCalledWith("123", 1001, 2001);
     });
   });
 
@@ -195,7 +160,7 @@ describe("ProductDetailPage", () => {
     renderPage();
 
     await screen.findByRole("heading", {
-        name: /Acer\s+Iconia Talk S/i,
+      name: /Acer\s+Iconia Talk S/i,
     });
 
     fireEvent.click(
@@ -205,9 +170,7 @@ describe("ProductDetailPage", () => {
     );
 
     await waitFor(() => {
-      expect(
-        localStorage.getItem("cartCount")
-      ).toBe("3");
+      expect(localStorage.getItem("cartCount")).toBe("3");
     });
   });
 });

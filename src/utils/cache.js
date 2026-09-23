@@ -29,8 +29,7 @@ export function getCache(key) {
       return null;
     }
 
-    const hasExpired =
-      Date.now() - parsedCache.timestamp > CACHE_DURATION;
+    const hasExpired = Date.now() - parsedCache.timestamp > CACHE_DURATION;
 
     if (hasExpired) {
       localStorage.removeItem(key);

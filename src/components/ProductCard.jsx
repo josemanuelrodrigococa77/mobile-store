@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { productPropType } from "../propTypes/productPropTypes";
 
 function ProductCard({ product }) {
   return (
@@ -19,5 +20,9 @@ function ProductCard({ product }) {
     </Link>
   );
 }
+
+ProductCard.propTypes = {
+  product: productPropType.isRequired,
+};
 
 export default ProductCard;

@@ -26,23 +26,19 @@ describe("ProductCard", () => {
 
   test("muestra precio no disponible si el producto no tiene precio", () => {
     const productWithoutPrice = {
-        id: "456",
-        brand: "Acer",
-        model: "Liquid Jade 2",
-        price: "",
-        imgUrl: "https://example.com/mobile.jpg",
+      id: "456",
+      brand: "Acer",
+      model: "Liquid Jade 2",
+      price: "",
+      imgUrl: "https://example.com/mobile.jpg",
     };
 
     render(
-        <MemoryRouter>
+      <MemoryRouter>
         <ProductCard product={productWithoutPrice} />
-        </MemoryRouter>
+      </MemoryRouter>
     );
 
-    expect(
-        screen.getByText("Precio no disponible")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Precio no disponible")).toBeInTheDocument();
   });
-
 });
-

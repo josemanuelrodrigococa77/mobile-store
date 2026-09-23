@@ -1,8 +1,7 @@
 import { getCache, saveCache } from "../utils/cache";
 
 const API_URL =
-  import.meta.env.VITE_API_URL ??
-  "https://itx-frontend-test.onrender.com";
+  import.meta.env.VITE_API_URL ?? "https://itx-frontend-test.onrender.com";
 
 function normalizeCamera(camera) {
   if (Array.isArray(camera)) {

@@ -26,9 +26,7 @@ function Header() {
         </nav>
       </div>
 
-      <div className="cart">
-        🛒 Carrito: {cartCount}
-      </div>
+      <div className="cart">🛒 Carrito: {cartCount}</div>
     </header>
   );
 }

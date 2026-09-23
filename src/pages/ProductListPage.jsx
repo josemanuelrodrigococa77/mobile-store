@@ -18,9 +18,10 @@ function ProductListPage() {
   }
 
   const search = searchTerm.toLowerCase();
-  const filteredProducts = (products ?? []).filter((product) =>
-    product.brand?.toLowerCase().includes(search) ||
-    product.model?.toLowerCase().includes(search)
+  const filteredProducts = (products ?? []).filter(
+    (product) =>
+      product.brand?.toLowerCase().includes(search) ||
+      product.model?.toLowerCase().includes(search)
   );
 
   return (

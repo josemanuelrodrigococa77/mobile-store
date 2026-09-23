@@ -21,8 +21,7 @@ describe("cache", () => {
   });
 
   test("elimina y devuelve null si la caché está expirada", () => {
-    const expiredTimestamp =
-      Date.now() - 2 * 60 * 60 * 1000;
+    const expiredTimestamp = Date.now() - 2 * 60 * 60 * 1000;
 
     localStorage.setItem(
       "product",
@@ -42,10 +41,7 @@ describe("cache", () => {
   });
 
   test("elimina y devuelve null si la caché está corrupta", () => {
-    localStorage.setItem(
-      "product",
-      "esto-no-es-un-json-valido"
-    );
+    localStorage.setItem("product", "esto-no-es-un-json-valido");
 
     const result = getCache("product");
 

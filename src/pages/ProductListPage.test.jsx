@@ -1,16 +1,6 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi,
-} from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import {
-  fireEvent,
-  render,
-  screen,
-} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 
@@ -59,14 +49,11 @@ describe("ProductListPage", () => {
       </MemoryRouter>
     );
 
-    expect(
-      await screen.findByText("Iconia Talk S")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Iconia Talk S")).toBeInTheDocument();
 
-    const searchInput =
-      screen.getByPlaceholderText(
-        "Buscar por marca o modelo..."
-      );
+    const searchInput = screen.getByPlaceholderText(
+      "Buscar por marca o modelo..."
+    );
 
     fireEvent.change(searchInput, {
       target: {
@@ -74,17 +61,11 @@ describe("ProductListPage", () => {
       },
     });
 
-    expect(
-      screen.getByText("Galaxy S10")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Galaxy S10")).toBeInTheDocument();
 
-    expect(
-      screen.queryByText("Iconia Talk S")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Iconia Talk S")).not.toBeInTheDocument();
 
-    expect(
-      screen.queryByText("iPhone 8")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("iPhone 8")).not.toBeInTheDocument();
   });
 
   test("filtra los productos por modelo", async () => {
@@ -94,14 +75,11 @@ describe("ProductListPage", () => {
       </MemoryRouter>
     );
 
-    expect(
-      await screen.findByText("Iconia Talk S")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Iconia Talk S")).toBeInTheDocument();
 
-    const searchInput =
-      screen.getByPlaceholderText(
-        "Buscar por marca o modelo..."
-      );
+    const searchInput = screen.getByPlaceholderText(
+      "Buscar por marca o modelo..."
+    );
 
     fireEvent.change(searchInput, {
       target: {
@@ -109,16 +87,10 @@ describe("ProductListPage", () => {
       },
     });
 
-    expect(
-      screen.getByText("iPhone 8")
-    ).toBeInTheDocument();
+    expect(screen.getByText("iPhone 8")).toBeInTheDocument();
 
-    expect(
-      screen.queryByText("Galaxy S10")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Galaxy S10")).not.toBeInTheDocument();
 
-    expect(
-      screen.queryByText("Iconia Talk S")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Iconia Talk S")).not.toBeInTheDocument();
   });
 });

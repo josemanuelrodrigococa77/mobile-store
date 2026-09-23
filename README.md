@@ -1,4 +1,3 @@
-
 # Mobile Store
 
 Aplicación web SPA desarrollada con React para consultar dispositivos móviles, ver sus características y añadir configuraciones de productos al carrito.
@@ -171,13 +170,13 @@ src/
 
 ## Scripts disponibles
 
-| Comando | Descripción |
-|---|---|
+| Comando         | Descripción                             |
+| --------------- | --------------------------------------- |
 | `npm run start` | Inicia la aplicación en modo desarrollo |
-| `npm run dev` | Inicia Vite en modo desarrollo |
-| `npm run build` | Genera el build de producción |
-| `npm run test` | Ejecuta los tests |
-| `npm run lint` | Ejecuta ESLint |
+| `npm run dev`   | Inicia Vite en modo desarrollo          |
+| `npm run build` | Genera el build de producción           |
+| `npm run test`  | Ejecuta los tests                       |
+| `npm run lint`  | Ejecuta ESLint                          |
 
 # Notas
 
@@ -190,12 +189,10 @@ El contador del carrito se persiste en `localStorage` y se sincroniza entre dist
 ### React 19
 
 El uso de React 19 no obliga a utilizar `use`, Suspense, Server Components o Actions.
-Este proyecto es una pequeña aplicación SPA (*Single Page Application*) construida con Vite y React Router que consume un API REST. Introducir estas funcionalidades de React 19 sin una necesidad concreta añadiría complejidad innecesaria, por lo que se ha optado deliberadamente por un enfoque convencional de obtención de datos y gestión de estado en el cliente.
+Este proyecto es una pequeña aplicación SPA (_Single Page Application_) construida con Vite y React Router que consume un API REST. Introducir estas funcionalidades de React 19 sin una necesidad concreta añadiría complejidad innecesaria, por lo que se ha optado deliberadamente por un enfoque convencional de obtención de datos y gestión de estado en el cliente.
 
 ## Autor
 
 Prueba técnica Front-End.
 JOSÉ MANUEL RODRIGO COCA
 jose.rodrigo@globant.com
-
-

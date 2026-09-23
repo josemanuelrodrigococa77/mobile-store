@@ -37,18 +37,24 @@ describe("getProducts", () => {
 
     const result = await getProducts();
 
-    expect(result[0]).toMatchObject({ id: "1", brand: "Acer", model: "Iconia" });
+    expect(result[0]).toMatchObject({
+      id: "1",
+      brand: "Acer",
+      model: "Iconia",
+    });
     expect(result[0].primaryCamera).toEqual([]);
     expect(fetch).not.toHaveBeenCalled();
   });
 
   test("obtiene, normaliza y cachea productos cuando no hay caché", async () => {
-    const products = [{
-      id: "1",
-      brand: "Acer",
-      model: "Iconia",
-      secondaryCmera: "2 MP",
-    }];
+    const products = [
+      {
+        id: "1",
+        brand: "Acer",
+        model: "Iconia",
+        secondaryCmera: "2 MP",
+      },
+    ];
 
     getCache.mockReturnValue(null);
     fetch.mockResolvedValue({
@@ -67,6 +73,8 @@ describe("getProducts", () => {
     getCache.mockReturnValue(null);
     fetch.mockResolvedValue({ ok: false, status: 500 });
 
-    await expect(getProducts()).rejects.toThrow("Error al obtener los productos");
+    await expect(getProducts()).rejects.toThrow(
+      "Error al obtener los productos"
+    );
   });
 });

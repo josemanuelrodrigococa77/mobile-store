@@ -14,15 +14,17 @@ function ProductDetailPage() {
   const fetchProduct = useCallback(() => getProductById(id), [id]);
   const { data: product, loading, error } = useAsync(fetchProduct);
 
-  const effectiveColor =
-    product?.options.colors.some((color) => color.code === selectedColor)
-      ? selectedColor
-      : (product?.options.colors[0]?.code ?? "");
+  const effectiveColor = product?.options.colors.some(
+    (color) => color.code === selectedColor
+  )
+    ? selectedColor
+    : (product?.options.colors[0]?.code ?? "");
 
-  const effectiveStorage =
-    product?.options.storages.some((storage) => storage.code === selectedStorage)
-      ? selectedStorage
-      : (product?.options.storages[0]?.code ?? "");
+  const effectiveStorage = product?.options.storages.some(
+    (storage) => storage.code === selectedStorage
+  )
+    ? selectedStorage
+    : (product?.options.storages[0]?.code ?? "");
 
   async function handleAddToCart() {
     try {
@@ -73,12 +75,24 @@ function ProductDetailPage() {
               <strong>Precio:</strong>{" "}
               {product.price ? `${product.price} €` : "No disponible"}
             </p>
-            <p><strong>CPU:</strong> {product.cpu}</p>
-            <p><strong>RAM:</strong> {product.ram}</p>
-            <p><strong>Sistema operativo:</strong> {product.os}</p>
-            <p><strong>Resolución:</strong> {product.displayResolution}</p>
-            <p><strong>Tamaño de pantalla:</strong> {product.displaySize}</p>
-            <p><strong>Batería:</strong> {product.battery}</p>
+            <p>
+              <strong>CPU:</strong> {product.cpu}
+            </p>
+            <p>
+              <strong>RAM:</strong> {product.ram}
+            </p>
+            <p>
+              <strong>Sistema operativo:</strong> {product.os}
+            </p>
+            <p>
+              <strong>Resolución:</strong> {product.displayResolution}
+            </p>
+            <p>
+              <strong>Tamaño de pantalla:</strong> {product.displaySize}
+            </p>
+            <p>
+              <strong>Batería:</strong> {product.battery}
+            </p>
             <p>
               <strong>Cámara principal:</strong>{" "}
               {product.primaryCamera.join(", ") || "No disponible"}
@@ -87,8 +101,12 @@ function ProductDetailPage() {
               <strong>Cámara secundaria:</strong>{" "}
               {product.secondaryCamera.join(", ") || "No disponible"}
             </p>
-            <p><strong>Dimensiones:</strong> {product.dimensions}</p>
-            <p><strong>Peso:</strong> {product.weight} g</p>
+            <p>
+              <strong>Dimensiones:</strong> {product.dimensions}
+            </p>
+            <p>
+              <strong>Peso:</strong> {product.weight} g
+            </p>
           </div>
 
           <div className="product-actions">
@@ -97,7 +115,9 @@ function ProductDetailPage() {
               <select
                 id="storage"
                 value={effectiveStorage}
-                onChange={(event) => setSelectedStorage(Number(event.target.value))}
+                onChange={(event) =>
+                  setSelectedStorage(Number(event.target.value))
+                }
               >
                 {product.options.storages.map((storage) => (
                   <option key={storage.code} value={storage.code}>
@@ -112,7 +132,9 @@ function ProductDetailPage() {
               <select
                 id="color"
                 value={effectiveColor}
-                onChange={(event) => setSelectedColor(Number(event.target.value))}
+                onChange={(event) =>
+                  setSelectedColor(Number(event.target.value))
+                }
               >
                 {product.options.colors.map((color) => (
                   <option key={color.code} value={color.code}>
